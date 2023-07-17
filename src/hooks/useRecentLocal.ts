@@ -10,20 +10,22 @@ export function useRecentLocal() {
     e.preventDefault();
 
     if (inputRef.current) {
-      const word = inputRef.current.value;
+      const word = inputRef.current.value.trim();
 
-      const localData = JSON.parse(localStorage.getItem('recent') || '[]');
+      if (word) {
+        const localData = JSON.parse(localStorage.getItem('recent') || '[]');
 
-      if (localData.includes(word)) {
-        localData.splice(localData.indexOf(word), 1);
+        if (localData.includes(word)) {
+          localData.splice(localData.indexOf(word), 1);
+        }
+
+        if (localData.length >= 5) {
+          localData.pop();
+        }
+
+        localData.unshift(word);
+        localStorage.setItem('recent', JSON.stringify(localData));
       }
-
-      if (localData.length >= 5) {
-        localData.pop();
-      }
-
-      localData.unshift(word);
-      localStorage.setItem('recent', JSON.stringify(localData));
     }
   };
 

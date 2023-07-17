@@ -35,8 +35,8 @@ export const SearchContainer = styled.div`
 
     .searchBtn {
       position: absolute;
-      right: 15px;
-      top: 15px;
+      right: 5px;
+      top: 5px;
       width: 50px;
       height: 50px;
       background-color: #007be9;
