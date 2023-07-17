@@ -1,11 +1,11 @@
 import React, { memo, useState } from 'react';
 import Suggestion from './Suggestion';
 import { SearchContainer } from '../styles/Search.styled';
+import { useSickAxios } from '../hooks/useSickAxios';
 
 const Search = memo(() => {
   const [sugOn, setSugOn] = useState(false);
-
-  const searchResult = ['1', '2', '3', '4', '5'];
+  const { searchResult, onInputChange } = useSickAxios();
 
   return (
     <>
@@ -21,7 +21,8 @@ const Search = memo(() => {
             className='searchInput'
             type='text'
             onFocus={() => setSugOn(true)}
-            onBlur={() => setSugOn(false)}></input>
+            onBlur={() => setSugOn(false)}
+            onChange={onInputChange}></input>
           <button className='searchBtn' type='submit'>
             🔍
           </button>
