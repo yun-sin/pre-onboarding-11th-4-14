@@ -16,5 +16,6 @@ export const SuggestionContainer = styled.div`
 
   .recommendText {
     margin-bottom: 10px;
+    cursor: pointer;
   }
 `;

@@ -15,9 +15,14 @@ export async function getSick(word: string) {
     console.info('calling api');
 
     const arr: string[] = [];
+
     response.data.forEach((v: any, i: number) => {
       arr.push(v.sickNm);
     });
+
+    if (arr.length < 1) {
+      arr.push('검색결과 없음');
+    }
 
     setCookie(word, arr);
 

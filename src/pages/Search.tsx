@@ -2,10 +2,12 @@ import React, { memo, useState } from 'react';
 import Suggestion from './Suggestion';
 import { SearchContainer } from '../styles/Search.styled';
 import { useSickAxios } from '../hooks/useSickAxios';
+import { useRecentLocal } from '../hooks/useRecentLocal';
 
 const Search = memo(() => {
   const [sugOn, setSugOn] = useState(false);
-  const { searchResult, onInputChange } = useSickAxios();
+  const { searchResult, recentSearch, onInputChange } = useSickAxios();
+  const { inputRef, onSearchSubmit } = useRecentLocal();
 
   return (
     <>
@@ -16,19 +18,22 @@ const Search = memo(() => {
           온라인으로 참여하기
         </h1>
         <div className='searchInputContainer'>
-          <input
-            id='searchInput'
-            className='searchInput'
-            type='text'
-            onFocus={() => setSugOn(true)}
-            onBlur={() => setSugOn(false)}
-            onChange={onInputChange}></input>
-          <button className='searchBtn' type='submit'>
-            🔍
-          </button>
+          <form onSubmit={onSearchSubmit}>
+            <input
+              ref={inputRef}
+              id='searchInput'
+              className='searchInput'
+              type='text'
+              onFocus={() => setSugOn(true)}
+              onBlur={() => setSugOn(false)}
+              onChange={onInputChange}></input>
+            <button className='searchBtn' type='submit'>
+              🔍
+            </button>
+          </form>
         </div>
       </SearchContainer>
-      {sugOn && <Suggestion searchResult={searchResult} />}
+      {sugOn && <Suggestion searchResult={searchResult} recentSearch={recentSearch} />}
     </>
   );
 });

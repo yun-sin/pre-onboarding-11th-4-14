@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+// input값이 바뀔경우 지연시간 이후 api를 호출하는 custom hook
+// input 값이 없을 경우 localstorage에서 최근 검색어 출력
+
+import React, { useState, useEffect } from 'react';
 import { getSick } from '../apis/SickAxios';
 
 export function useSickAxios() {
-  const [searchResult, setSearchResult] = useState<string[]>(['검색어 없음']);
+  const [searchResult, setSearchResult] = useState<string[]>([]);
+  const [recentSearch, setRecentSearch] = useState<string[]>([]);
   const [timerId, setTimerId] = useState<number>();
+
+  useEffect(() => {
+    const recent = localStorage.getItem('recent');
+    if (recent) setRecentSearch(JSON.parse(recent));
+    setSearchResult([]);
+  }, []);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timerId); // 이전의 타이머를 취소
@@ -18,9 +28,11 @@ export function useSickAxios() {
       }, 500);
       setTimerId(Number(id));
     } else {
-      setSearchResult(['검색어 없음']);
+      const recent = localStorage.getItem('recent');
+      if (recent) setRecentSearch(JSON.parse(recent));
+      setSearchResult([]);
     }
   };
 
-  return { searchResult, onInputChange };
+  return { searchResult, recentSearch, onInputChange };
 }
