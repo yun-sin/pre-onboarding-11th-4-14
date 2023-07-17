@@ -13,18 +13,18 @@ export function useRecentLocal() {
       const word = inputRef.current.value.trim();
 
       if (word) {
-        const localData = JSON.parse(localStorage.getItem('recent') || '[]');
+        const data = JSON.parse(localStorage.getItem('recent') || '[]');
 
-        if (localData.includes(word)) {
-          localData.splice(localData.indexOf(word), 1);
+        if (data.includes(word)) {
+          data.splice(data.indexOf(word), 1);
         }
 
-        if (localData.length >= 5) {
-          localData.pop();
+        if (data.length >= 5) {
+          data.pop();
         }
 
-        localData.unshift(word);
-        localStorage.setItem('recent', JSON.stringify(localData));
+        data.unshift(word);
+        localStorage.setItem('recent', JSON.stringify(data));
       }
     }
   };

@@ -4,7 +4,6 @@ export const SuggestionContainer = styled.div`
   background-color: white;
   width: 500px;
   margin: auto;
-  margin-top: 10px;
   border-radius: 20px;
   padding: 20px 20px;
 
@@ -15,7 +14,14 @@ export const SuggestionContainer = styled.div`
   }
 
   .recommendText {
-    margin-bottom: 10px;
+    height: 30px;
+    line-height: 30px;
+
     cursor: pointer;
+
+    &.selected {
+      background-color: skyblue;
+      color: white;
+    }
   }
 `;

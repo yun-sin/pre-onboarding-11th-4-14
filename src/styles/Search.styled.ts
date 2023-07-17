@@ -12,7 +12,7 @@ export const SearchContainer = styled.div`
   .searchInputContainer {
     position: relative;
     width: 500px;
-    height: 80px;
+    height: 70px;
     margin: auto;
 
     .magnifier {

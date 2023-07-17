@@ -3,11 +3,13 @@ import Suggestion from './Suggestion';
 import { SearchContainer } from '../styles/Search.styled';
 import { useSickAxios } from '../hooks/useSickAxios';
 import { useRecentLocal } from '../hooks/useRecentLocal';
+import { useKeyHandle } from '../hooks/useKeyHandle';
 
 const Search = memo(() => {
   const [sugOn, setSugOn] = useState(false);
   const { searchResult, recentSearch, onInputChange } = useSickAxios();
   const { inputRef, onSearchSubmit } = useRecentLocal();
+  const { selectedId, onKeyHandle } = useKeyHandle({ searchResult });
 
   return (
     <>
@@ -26,14 +28,21 @@ const Search = memo(() => {
               type='text'
               onFocus={() => setSugOn(true)}
               onBlur={() => setSugOn(false)}
-              onChange={onInputChange}></input>
+              onChange={onInputChange}
+              onKeyDown={onKeyHandle}></input>
             <button className='searchBtn' type='submit'>
               🔍
             </button>
           </form>
         </div>
       </SearchContainer>
-      {sugOn && <Suggestion searchResult={searchResult} recentSearch={recentSearch} />}
+      {sugOn && (
+        <Suggestion
+          searchResult={searchResult}
+          recentSearch={recentSearch}
+          selectedId={selectedId}
+        />
+      )}
     </>
   );
 });
