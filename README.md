@@ -43,12 +43,20 @@
 
 ## 요구 사항
 
+> - API 호출별로 로컬 캐싱 구현
+> - 입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행
+> - 키보드만으로 추천 검색어들로 이동 가능하도록 구현
+
 ### API 호출별로 로컬 캐싱 구현
    - 브라우저의 Cookie를 사용
    - API 호출시 해당 검색어에 저장되어 있는 Cookie 확인
      - 쿠키에 있을 경우 -> 쿠키 데이터 출력
      - 쿠키에 없을 경우 -> API 호출하여 데이터 출력 -> 쿠키에 데이터 저장 `expire time 10분`
-    
+
+
+https://github.com/yun-sin/pre-onboarding-11th-4-14/assets/99275134/bafb75e0-d155-4a19-ba26-a3a7db11f85c
+
+
 
 ```js
 // Cookie.ts
@@ -120,6 +128,13 @@ export async function getSick(word: string) {
 ### 입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행
    - setTimeout을 사용, input의 값이 바뀌면  0.5초후 API 호출
    - 대기중 값이 또 바뀌면 그전의 타이머를 clearTimeout으로 삭제
+   - 대기중에는 `검색중...` 출력
+
+
+
+https://github.com/yun-sin/pre-onboarding-11th-4-14/assets/99275134/91133b2b-4480-4e05-b922-cdfa52db1fa3
+
+
 
 ```ts
 //useSickAxios.ts
@@ -190,5 +205,71 @@ export function useKeyHandle({ searchResult }: { searchResult: string[] }) {
 
   return { selectedId, onKeyHandle };
 }
+
+```
+
+<br/>
+<br/>
+<br/>
+
+## 추가 구현 기능
+ - 최근 검색어 기능
+   - localStroge를 사용하여 검색어를 입력하지 않으면 최근 검색어 최대 5개 출력
+
+
+https://github.com/yun-sin/pre-onboarding-11th-4-14/assets/99275134/560d3307-6f90-459c-8d1c-06fd5b535470
+
+
+```ts
+// useRecentLocal.ts
+
+// 최근 검색어 구현
+// input이 submit 될 경우 해당 값을 localstorage에 저장하는 custom hook
+// 최근 검색어는 5개까지 저장되며 최근일수록 먼저 출력
+import { useRef } from 'react';
+
+export function useRecentLocal() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const onSearchSubmit = (e: any) => {
+    e.preventDefault();
+
+    if (inputRef.current) {
+      const word = inputRef.current.value.trim();
+
+      if (word) {
+        const data = JSON.parse(localStorage.getItem('recent') || '[]');
+
+        if (data.includes(word)) {
+          data.splice(data.indexOf(word), 1);
+        }
+
+        if (data.length >= 5) {
+          data.pop();
+        }
+
+        data.unshift(word);
+        localStorage.setItem('recent', JSON.stringify(data));
+      }
+    }
+  };
+
+  return { inputRef, onSearchSubmit };
+}
+```
+
+```ts
+// useSickAxios.ts
+.
+.
+.
+  useEffect(() => {
+    const recent = localStorage.getItem('recent');
+    if (recent) setRecentSearch(JSON.parse(recent));
+    setSearchResult([]);
+  }, []);
+.
+.
+.
 
 ```
