@@ -1,6 +1,6 @@
 // 쿠키를 설정하는 함수
 export function setCookie(key: string, value: string[]) {
-  const expireDate = new Date().getTime() + 6000 * 10; // 1분의 expire time
+  const expireDate = new Date().getTime() + 6000 * 10; // 10분의 expire time
   document.cookie = `${key}=${value}; path=/; expires=${new Date(expireDate).toUTCString()}`;
 }
 

@@ -9,7 +9,7 @@ export async function getSick(word: string) {
       return data;
     }
 
-    const response = await axios.get(`http://localhost:4000/sick?q=${word}`);
+    const response = await axios.get(`https://wild-glacier-avenue.glitch.me/sick?q=${word}`);
     console.info('calling api');
     const arr: string[] = [];
     response.data.forEach((v: any, i: number) => {
