@@ -20,16 +20,16 @@
 ## 기술 스택
 
 - Development
-
-  ![React](https://img.shields.io/badge/Create--React--App-5.0.1-20232A?logo=react)
-  ![react-router-dom](https://img.shields.io/badge/react--router-6.14.1-CA4245?logo=reactRouter)
-  ![typescript](https://img.shields.io/badge/typescript-4.9.5-007ACC?logo=typescript)
-  ![styled-components](https://img.shields.io/badge/styled--components%2Fcss-6.0.3-28A745?logo=styled-components)
-  ![axios](https://img.shields.io/badge/axios-1.4.0-%23671DDF?logo=axios&logoColor=%23671DDF)
+  - React
+  - TypeScript
+  - Axios
+  - Styled-Components
+  - React-Router-Dom
 
 - Deploy
   
-  ![aws s3](https://img.shields.io/badge/Amazon_S3--S?logo=amazonaws&logoColor=white)
+  - Glitch [API]
+  - Vercel [Web]
 
 <br/>
 <br/>
