@@ -7,10 +7,13 @@
 <div align='center'>
    <p><a href="https://clinicaltrialskorea.com/">한국임상정보</a>의 검색 영역을 클론하여 <br/>
 검색창, 검색어 추천 기능, 캐싱 기능을 구현하는 개인 과제입니다. </p>
-<!--   <a href="http://wanted-11th-3-14-test.s3-website.ap-northeast-2.amazonaws.com/"><strong>배포 링크</strong></a> -->
+  <a href="https://pre-onboarding-11th-4-14-gold.vercel.app/"><strong>배포 링크</strong></a>
 </div>
 
 <div align='right'> 2023.07.16 ~ 2023.07.19 </div>
+
+<br/>
+<br/>
 
 
 
@@ -24,7 +27,13 @@
   ![styled-components](https://img.shields.io/badge/styled--components%2Fcss-6.0.3-28A745?logo=styled-components)
   ![axios](https://img.shields.io/badge/axios-1.4.0-%23671DDF?logo=axios&logoColor=%23671DDF)
 
+- Deploy
+  
+  ![aws s3](https://img.shields.io/badge/Amazon_S3--S?logo=amazonaws&logoColor=white)
+
 <br/>
+<br/>
+
 
 ## 폴더 구조
 
@@ -39,6 +48,9 @@
  ┣ 📜index.tsx
  ┗ 📜react-app-env.d.ts
 ```
+
+<br/>
+<br/>
 
 
 ## 요구 사항
@@ -171,6 +183,10 @@ https://github.com/yun-sin/pre-onboarding-11th-4-14/assets/99275134/91133b2b-448
 - input에 onKeyDown에 이벤트 삽입 (위,아래 방향키, 엔터)
 - useState를 활용하여 검색 결과 목록에서 selectedId에 해당하는 인덱스에 클래스 삽입 후 css 강조
 - 선택 후 엔터 입력시 alert창 출력
+
+
+https://github.com/yun-sin/pre-onboarding-11th-4-14/assets/99275134/49c58e72-b730-4a90-bbf6-e298b5e17762
+
 
 ```ts
 // useKeyHandle.ts
